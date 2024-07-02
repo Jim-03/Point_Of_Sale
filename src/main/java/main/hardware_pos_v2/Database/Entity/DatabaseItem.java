@@ -21,6 +21,7 @@ public class DatabaseItem {
 
     @Column(name = "selling_price")
     private Double sellingPrice;
+    private int stock;
 
     public DatabaseItem() {}
 
@@ -70,5 +71,13 @@ public class DatabaseItem {
 
     public void setSellingPrice(Double sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public void setStock(int quantity) {
+        this.stock = quantity;
+    }
+
+    public int getStock() {
+        return stock;
     }
 }
