@@ -62,4 +62,14 @@ public class Category {
     public void setItemList(List<DatabaseItem> itemList) {
         this.itemList = itemList;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", itemList=" + itemList +
+                '}';
+    }
 }
