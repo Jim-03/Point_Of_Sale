@@ -36,7 +36,7 @@ public class Account {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.trim().toLowerCase();
     }
 
     public String getPassword() {
