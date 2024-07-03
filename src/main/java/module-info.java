@@ -4,6 +4,7 @@ module main.hardware_pos_v {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires java.naming;
+    requires jbcrypt;
 
 
     opens main.hardware_pos_v2 to javafx.fxml;

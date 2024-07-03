@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +42,7 @@ public class AccountDAO {
                 return result;
             }
             // Save the new account
-            account.setUsername(account.getUsername());
+            account.setPassword(hashPassword(account.getPassword()));
             session.save(account);
             transaction.commit();
             result.put(true, "Account successfully created");
@@ -132,7 +132,7 @@ public class AccountDAO {
 
             // Update the account
             outdatedAccount.setUsername(newAccountData.getUsername().trim());
-            outdatedAccount.setPassword(newAccountData.getPassword());
+            outdatedAccount.setPassword(hashPassword(newAccountData.getPassword()));
 
             // Save the updated account
             session.saveOrUpdate(outdatedAccount);
@@ -189,5 +189,14 @@ public class AccountDAO {
             result.put(false, "An error occurred while deleting the account: " + e.getMessage());
             return result;
         }
+    }
+
+    /**
+     * hashes a password for security
+     * @param password the readable password string
+     * @return the hashed value
+     */
+    public String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 }
