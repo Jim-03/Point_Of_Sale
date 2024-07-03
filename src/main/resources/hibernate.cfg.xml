@@ -17,5 +17,6 @@
         <property name="hibernate.generate_statistics">true</property>
         <mapping class="main.hardware_pos_v2.Database.Entity.Category"/>
         <mapping class="main.hardware_pos_v2.Database.Entity.DatabaseItem"/>
+        <mapping class="main.hardware_pos_v2.Database.Entity.Account"/>
     </session-factory>
 </hibernate-configuration>
