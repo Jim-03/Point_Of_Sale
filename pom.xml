@@ -97,7 +97,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>main.hardware_pos_v2/main.hardware_pos_v2.HelloApplication</mainClass>
+                            <mainClass>main.hardware_pos_v2/main.hardware_pos_v2.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
