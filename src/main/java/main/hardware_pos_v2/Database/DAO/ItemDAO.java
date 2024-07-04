@@ -235,4 +235,37 @@ public class ItemDAO {
             }
         }
     }
+
+    public Item getItem(String name){
+        Transaction transaction = null;
+
+        // Check if name is provided
+        if (name == null || name.trim().isEmpty()) {
+            return null;
+        }
+
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+
+            // Query for an item
+            Query<DatabaseItem> query = session.createQuery("FROM DatabaseItem WHERE name = :itemName", DatabaseItem.class);
+            query.setParameter("itemName", name);
+            DatabaseItem databaseItem = query.uniqueResult();
+
+            // Check if the item was found
+            if (databaseItem == null){
+                return null;
+            }
+            Item item = new Item();
+            item.setName(databaseItem.getName());
+            item.setBuyingPrice(databaseItem.getBuyingPrice());
+            item.setSellingPrice(databaseItem.getSellingPrice());
+            item.setCategoryName(databaseItem.getCategory().getName());
+            item.setQuantity(databaseItem.getStock());
+            return item;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

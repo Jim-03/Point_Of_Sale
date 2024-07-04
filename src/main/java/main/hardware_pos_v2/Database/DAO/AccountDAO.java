@@ -199,4 +199,45 @@ public class AccountDAO {
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
+    /**
+     * Retrieves the account entity from the database.
+     * @param username The username of the account to retrieve.
+     * @return The Account entity if found, null otherwise.
+     */
+    public Account getAccount(String username) {
+        Transaction transaction = null;
+
+        // Check if username is provided
+        if (username.trim().isEmpty()) {
+            return null;
+        }
+
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+
+            // Query for account data
+            Query<Account> query = session.createQuery("FROM Account WHERE username = :name", Account.class);
+            query.setParameter("name", username);
+            Account account = query.uniqueResult();
+
+            // Commit transaction
+            transaction.commit();
+
+            return account; // Return the Account entity or null if not found
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            return null; // Return null on exception
+        }
+    }
+
+    public static void main(String[] args) {
+        AccountDAO accountDAO =new AccountDAO();
+        Account account = new Account();
+        account.setUsername("Jimmy");
+        account.setPassword("123");
+        accountDAO.createAccount(account);
+    }
 }
