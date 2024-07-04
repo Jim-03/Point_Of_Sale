@@ -17,7 +17,7 @@
                <font>
                   <Font name="SansSerif Bold" size="16.0" />
                </font></Label>
-            <Button fx:id="exitButton" mnemonicParsing="false" text="Exit" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitTheApp" text="Exit" />
          </children>
       </HBox>
    </top>
