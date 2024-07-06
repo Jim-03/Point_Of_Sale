@@ -36,6 +36,15 @@ public class ItemDAO {
             Query<Category> query = session.createQuery("FROM Category WHERE name = :categoryName", Category.class);
             query.setParameter("categoryName", newItem.getCategoryName());
             Category itemCategory = query.uniqueResult();
+
+            // Check for duplicate item
+            Query<DatabaseItem> databaseItemQuery = session.createQuery("FROM DatabaseItem WHERE name = :itemName", DatabaseItem.class);
+            databaseItemQuery.setParameter("itemName", newItem.getName().trim().toLowerCase());
+            if (query.uniqueResult() != null) {
+                result.put(false, "A similar item already exists in the database");
+                return result;
+            }
+
             // If category doesn't exist
             if (itemCategory == null) {
                 result.put(false, "The specified category wasn't found");
@@ -71,7 +80,9 @@ public class ItemDAO {
     public Map<Boolean, String> readItem(String itemName){
         Transaction transaction = null;
         Map<Boolean, String> result = new HashMap<>();
-        try (Session session =sessionFactory.openSession()) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             Query<DatabaseItem> query = session.createQuery("FROM DatabaseItem WHERE name = :itemName", DatabaseItem.class);
             query.setParameter("itemName", itemName);
@@ -90,6 +101,10 @@ public class ItemDAO {
             }
             result.put(false, "An error occurred: " + e.getMessage());
             return result;
+        } finally {
+            if (session != null){
+                session.close();
+            }
         }
     }
 
