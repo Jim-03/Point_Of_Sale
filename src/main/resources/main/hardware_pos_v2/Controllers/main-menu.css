@@ -1,0 +1,35 @@
+*{
+	-fx-font-style: normal;
+	-fx-font-family: sans-serif;
+}
+#header, #navigationBar{
+	-fx-background-color: red;
+}
+#heading{
+	-fx-font-weight: bold;
+}
+#contentArea{
+	-fx-padding: 10px;
+}
+.buttons{
+	-fx-color: green;
+}
+#dataEntry{
+	-fx-border-style: solid;
+	-fx-border-width: 1px;
+}
+.sectionHeaders{
+	-fx-font-weight: bold;
+	-fx-font-size: 16px;
+}
+#inputArea, #purchaseTable{
+	-fx-border-style: solid;
+	-fx-border-radius: 10px;
+}
+.inputButtons{
+	-fx-color: green;
+}
+.inputButtons:hover{
+	-fx-color: darkgreen;
+	-fx-font-weight: bold;
+}
