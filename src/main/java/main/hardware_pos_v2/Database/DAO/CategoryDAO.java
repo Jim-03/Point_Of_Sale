@@ -37,7 +37,7 @@ public class CategoryDAO {
             transaction = session.beginTransaction();
             // Check if the category already exists
             Query<Category> query = session.createQuery("FROM Category WHERE name = :categoryName", Category.class);
-            query.setParameter(":categoryName", category.getName());
+            query.setParameter("categoryName", category.getName());
             Category categoryExists = query.uniqueResult();
             if (categoryExists != null) {
                 result.put(false, "The category already exists");
