@@ -120,14 +120,11 @@ public class mainMenuController {
 
     public void createItem() {
         // CLear anything from the feedback
-        feedBackLabel.setVisible(false);
         String name = itemNameInput.getText();
 
         //Check if a name was entered
         if (name == null || name.trim().isEmpty()) {
-            feedBackLabel.setText("Input Item name");
-            feedBackLabel.setStyle("-fx-text-fill: red");
-            feedBackLabel.setVisible(true);
+            setFeedBackLabel(false, "Input Item name");
             return;
         }
         try {
@@ -135,35 +132,32 @@ public class mainMenuController {
 
             // Check if the right quantity is provided
             if (quantity <= 0) {
-                feedBackLabel.setText("Please enter a valid quantity");
-                feedBackLabel.setStyle("-fx-text-fill: red");
-                feedBackLabel.setVisible(true);
+                setFeedBackLabel(false, "Please enter a valid quantity");
                 return;
             }
         } catch (NumberFormatException e) {
-            feedBackLabel.setText("Please enter quantity as a number");
-            feedBackLabel.setStyle("-fx-text-fill: red");
-            feedBackLabel.setVisible(true);
+            setFeedBackLabel(false, "Please enter quantity as a number");
             return;
         }
-        feedBackLabel.setVisible(true);
-        feedBackLabel.setText("Searching...");
-        feedBackLabel.setStyle("-fx-text-fill: green");
+        setFeedBackLabel(true, "Searching...");
         // Fetch the data from database
         ItemDAO itemDAO = new ItemDAO();
         Map<Boolean, String> result = itemDAO.readItem(name);
 
         // Check if the item was found
         if (result.containsKey(false)){
-            feedBackLabel.setText(result.get(false));
-            feedBackLabel.setStyle("-fx-text-fill: red");
-            feedBackLabel.setVisible(true);
+            setFeedBackLabel(false, result.get(false));
             return;
         } else {
-            feedBackLabel.setText("Item found");
-            feedBackLabel.setStyle("-fx-text-fill: green");
-            feedBackLabel.setVisible(true);
+            setFeedBackLabel(true, "Item found");
         }
+    }
+
+    public void setFeedBackLabel(boolean state, String message){
+        feedBackLabel.setVisible(false);
+        feedBackLabel.setText(message);
+        feedBackLabel.setStyle(state ? "fx-text-fill: green" : "-fx-text-fill: red");
+        feedBackLabel.setVisible(true);
     }
 
     @FXML
