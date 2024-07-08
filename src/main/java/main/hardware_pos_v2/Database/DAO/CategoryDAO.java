@@ -1,5 +1,6 @@
 package main.hardware_pos_v2.Database.DAO;
 
+import javafx.collections.ObservableList;
 import main.hardware_pos_v2.Database.Entity.Category;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CategoryDAO {
@@ -180,5 +182,25 @@ public class CategoryDAO {
             result.put(false, "An error occured while deleting: "+ e.getMessage());
             return result;
         }
+    }
+
+    /**
+     * retrieves a list of all categories
+     * @return a list of categories
+     */
+    public List<Category> fetchAll() {
+        Transaction transaction = null;
+        List<Category> list = null;
+
+        try (Session session =sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            list = session.createQuery("FROM Category", Category.class).list();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return list;
     }
 }
