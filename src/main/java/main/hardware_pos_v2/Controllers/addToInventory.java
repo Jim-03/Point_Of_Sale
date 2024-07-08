@@ -119,7 +119,21 @@ public class addToInventory {
         Map<Boolean, String> result = itemDAO.addItem(item);
 
         // Check for result
-        if (result.containsKey(false)) {
+        // If a similar product is found
+        if (result.get(false).equals("A similar item already exists in the database")){
+            Item updatedItem = itemDAO.getItem(item.getName());
+            updatedItem.setQuantity(updatedItem.getQuantity() + item.getQuantity());
+            Map<Boolean, String> update = itemDAO.updateItem(updatedItem, item.getName());
+            // Check the result for updating
+            if (update.containsKey(true)) {
+                setFeedback(true, update.get(true));
+                return;
+            }
+            else {
+                setFeedback(false, update.get(false));
+                return;
+            }
+        } else if (result.containsKey(false)) {
             setFeedback(false, result.get(false));
             return;
         } else {
