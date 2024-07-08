@@ -152,7 +152,7 @@ public class ItemDAO {
                 // Save the new data
                 session.saveOrUpdate(oldItemData);
                 transaction.commit();
-                result.put(true, "Item's data has been successfully added");
+                result.put(true, "Item's data has updated successfully");
                 return result;
             } catch (Exception e) { // In case  of errors
                 if (transaction != null) {
