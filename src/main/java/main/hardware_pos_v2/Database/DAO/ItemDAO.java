@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ItemDAO {
@@ -40,7 +41,7 @@ public class ItemDAO {
             // Check for duplicate item
             Query<DatabaseItem> databaseItemQuery = session.createQuery("FROM DatabaseItem WHERE name = :itemName", DatabaseItem.class);
             databaseItemQuery.setParameter("itemName", newItem.getName().trim().toLowerCase());
-            if (query.uniqueResult() != null) {
+            if (databaseItemQuery.uniqueResult() != null) {
                 result.put(false, "A similar item already exists in the database");
                 return result;
             }
@@ -282,5 +283,23 @@ public class ItemDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * returns a list of all items in a specific category
+     * @param category the category data
+     * @return the list, null otherwise
+     */
+    public List<DatabaseItem> fetchItemsInCategory(Category category) {
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM DatabaseItem WHERE category.id = :categoryId", DatabaseItem.class)
+                    .setParameter("categoryId", category.getId())
+                    .list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
