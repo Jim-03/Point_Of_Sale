@@ -18,6 +18,6 @@
         <mapping class="main.hardware_pos_v2.Database.Entity.Category"/>
         <mapping class="main.hardware_pos_v2.Database.Entity.DatabaseItem"/>
         <mapping class="main.hardware_pos_v2.Database.Entity.Account"/>
-        <mapping class="main.hardware_pos_v2.Database.Entity.Sales"/>
+        <mapping class="main.hardware_pos_v2.Database.Entity.Sale"/>
     </session-factory>
 </hibernate-configuration>

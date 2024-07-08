@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "sales")
-public class Sales {
+public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -40,9 +40,9 @@ public class Sales {
     @Column
     private double debt;
 
-    public Sales() {}
+    public Sale() {}
 
-    public Sales(int id, String customerName, String phoneNumber, List<Item> itemList, String refNo, double totalPaid, double listTotal, double debt) {
+    public Sale(int id, String customerName, String phoneNumber, List<Item> itemList, String refNo, double totalPaid, double listTotal, double debt) {
         this.id = id;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
@@ -123,7 +123,7 @@ public class Sales {
 
     @Override
     public String toString() {
-        return "Sales{" +
+        return "Sale{" +
                 "id=" + id +
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
