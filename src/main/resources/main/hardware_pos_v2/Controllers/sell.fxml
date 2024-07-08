@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@main-menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.hardware_pos_v2.Controllers.mainMenuController">
+<VBox stylesheets="@main-menu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.hardware_pos_v2.Controllers.sellController">
     <children>
         <HBox spacing="20.0" VBox.vgrow="ALWAYS">
             <children>
@@ -37,7 +37,7 @@
                             </VBox.margin>
                         </TextField>
                         <Label prefHeight="50.0" styleClass="sectionHeaders" stylesheets="@main-menu.css" text="ITEM ENTRY" />
-                        <Label fx:id="feedBackLabel" prefHeight="50.0" prefWidth="229.0" />
+                        <Label fx:id="feedBackLabel" />
                         <Label prefHeight="50.0" text="NAME:" VBox.vgrow="ALWAYS">
                             <VBox.margin>
                                 <Insets />
@@ -84,7 +84,7 @@
                         <TextField fx:id="debtsButton" prefHeight="50.0" />
                         <Label prefHeight="50.0" text="Total Payments" />
                         <TextField fx:id="totalPaymentsOutput" prefHeight="50.0" />
-                        <Button fx:id="sellButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" styleClass="inputButtons" text="Sell">
+                        <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sellItems" prefHeight="50.0" prefWidth="90.0" styleClass="inputButtons" text="Sell">
                             <VBox.margin>
                                 <Insets top="5.0" />
                             </VBox.margin>

@@ -20,27 +20,13 @@ import main.hardware_pos_v2.Database.DAO.ItemDAO;
 import main.hardware_pos_v2.Models.Item;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class mainMenuController {
 
     @FXML
-    private Button restockInventoryButton;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
     private VBox contentArea;
-
-    @FXML
-    private TextField customerNameInput;
-
-    @FXML
-    private TextField dateOfPurchaseOutput;
-
-    @FXML
-    private TextField debtsButton;
 
     @FXML
     private HBox header;
@@ -52,112 +38,25 @@ public class mainMenuController {
     private Button homeButton;
 
     @FXML
-    private VBox inputArea;
-
-    @FXML
-    private TextField itemNameInput;
-
-    @FXML
-    private TableColumn<Item, String> itemsColumn;
-
-    @FXML
     private Button logoutButton;
 
     @FXML
     private HBox navigationBar;
 
     @FXML
-    private TextField phoneInput;
-
-    @FXML
-    private TableColumn<Item, Double> priceColumn;
-
-    @FXML
     private Button productsButton;
 
     @FXML
-    private TableView<Item> purchaseTable;
-
-    @FXML
-    private TableColumn<Item, Integer> quantityColumn;
-
-    @FXML
-    private TextField quantityInput;
+    private Button restockInventoryButton;
 
     @FXML
     private Button salesButton;
 
-    @FXML
-    private Label feedBackLabel;
-
-    @FXML
-    private Button sellButton;
-
-    @FXML
-    private TextField serverNameInput;
-
-    @FXML
-    private Button submitButton;
-
-    @FXML
-    private TextField totalPaymentsOutput;
-
-    @FXML
-    private TableColumn<Item, Double> totalPriceColumn;
-
-    ObservableList<Item> list = FXCollections.observableArrayList();
-
     /**
-     * initialize the table view
+     * initialize to load the content area with sell screen
      */
     public void initialize() {
-        itemsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSellingPrice()).asObject());
-        quantityColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
-        totalPriceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getQuantity() * cellData.getValue().getSellingPrice()).asObject());
-        purchaseTable.setItems(list);
-    }
-
-    public void createItem() {
-        // CLear anything from the feedback
-        String name = itemNameInput.getText();
-
-        //Check if a name was entered
-        if (name == null || name.trim().isEmpty()) {
-            setFeedBackLabel(false, "Input Item name");
-            return;
-        }
-        try {
-            int quantity = Integer.parseInt(quantityInput.getText());
-
-            // Check if the right quantity is provided
-            if (quantity <= 0) {
-                setFeedBackLabel(false, "Please enter a valid quantity");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            setFeedBackLabel(false, "Please enter quantity as a number");
-            return;
-        }
-        setFeedBackLabel(true, "Searching...");
-        // Fetch the data from database
-        ItemDAO itemDAO = new ItemDAO();
-        Map<Boolean, String> result = itemDAO.readItem(name);
-
-        // Check if the item was found
-        if (result.containsKey(false)){
-            setFeedBackLabel(false, result.get(false));
-            return;
-        } else {
-            setFeedBackLabel(true, "Item found");
-        }
-    }
-
-    public void setFeedBackLabel(boolean state, String message){
-        feedBackLabel.setVisible(false);
-        feedBackLabel.setText(message);
-        feedBackLabel.setStyle(state ? "fx-text-fill: green" : "-fx-text-fill: red");
-        feedBackLabel.setVisible(true);
+        changeContentArea("sell.fxml");
     }
 
     @FXML
@@ -168,6 +67,11 @@ public class mainMenuController {
     @FXML
     public void sellScene() {
         changeContentArea("sell.fxml");
+    }
+
+    @FXML
+    public void viewInventory() {
+        changeContentArea("view-inventory.fxml");
     }
 
     public void changeContentArea(String fileName){
