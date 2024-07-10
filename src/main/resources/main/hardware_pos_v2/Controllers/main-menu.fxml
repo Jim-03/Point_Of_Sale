@@ -38,7 +38,7 @@
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="logoutButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="40.0" styleClass="buttons" stylesheets="@main-menu.css" text="LOGOUT" HBox.hgrow="ALWAYS">
+                  <Button fx:id="exitButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#setLogoutButton" prefHeight="40.0" styleClass="buttons" stylesheets="@main-menu.css" text="EXIT" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>

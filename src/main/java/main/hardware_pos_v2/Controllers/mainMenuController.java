@@ -1,27 +1,13 @@
 package main.hardware_pos_v2.Controllers;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.hardware_pos_v2.Database.DAO.ItemDAO;
-import main.hardware_pos_v2.Models.Item;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
 public class mainMenuController {
 
@@ -38,7 +24,7 @@ public class mainMenuController {
     private Button homeButton;
 
     @FXML
-    private Button logoutButton;
+    private Button exitButton;
 
     @FXML
     private HBox navigationBar;
@@ -77,6 +63,13 @@ public class mainMenuController {
     @FXML
     public void viewSales() {
         changeContentArea("sales.fxml");
+    }
+
+    @FXML
+    public  void setLogoutButton(){
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+        Platform.exit();
     }
 
     public void changeContentArea(String fileName){
