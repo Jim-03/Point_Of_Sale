@@ -203,4 +203,16 @@ public class CategoryDAO {
         }
         return list;
     }
+
+
+    /**
+     * retrieves a category class from the database
+     * @param categoryName the name of the category to search for
+     * @return the category data
+     */
+    public Category getCategory(String categoryName) {
+        return sessionFactory.openSession().createQuery("FROM Category WHERE name = :categoryName", Category.class)
+                .setParameter("categoryName", categoryName)
+                .uniqueResult();
+    }
 }
