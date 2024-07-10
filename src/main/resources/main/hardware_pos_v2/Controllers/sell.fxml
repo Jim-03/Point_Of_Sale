@@ -79,18 +79,14 @@
                             </VBox.margin>
                         </TextField>
                         <Label prefHeight="50.0" text="DATE:" />
-                        <TextField fx:id="dateOfPurchaseOutput" prefHeight="50.0" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="dateOfPurchaseOutput" disable="true" prefHeight="50.0" VBox.vgrow="ALWAYS">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
                         </TextField>
-                        <Button fx:id="submitButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="90.0" styleClass="inputButtons" text="Submit">
-                            <VBox.margin>
-                                <Insets top="5.0" />
-                            </VBox.margin></Button>
                         <Label prefHeight="50.0" styleClass="sectionHeaders" text="Payments" />
-                        <Label prefHeight="50.0" text="Debts" />
-                        <TextField fx:id="debtsButton" disable="true" prefHeight="50.0" />
+                        <Label prefHeight="50.0" text="Return" />
+                        <TextField fx:id="changeOutput" disable="true" prefHeight="50.0" />
                         <Label prefHeight="50.0" text="Total Payments" />
                         <TextField fx:id="totalPaymentsOutput" disable="true" prefHeight="50.0" />
                   <Label prefHeight="50.0" text="Amount Paid:" />
