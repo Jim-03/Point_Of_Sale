@@ -74,6 +74,11 @@ public class mainMenuController {
         changeContentArea("view-inventory.fxml");
     }
 
+    @FXML
+    public void viewSales() {
+        changeContentArea("sales.fxml");
+    }
+
     public void changeContentArea(String fileName){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fileName));
