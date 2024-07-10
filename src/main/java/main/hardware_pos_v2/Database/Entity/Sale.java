@@ -1,7 +1,6 @@
 package main.hardware_pos_v2.Database.Entity;
 
 import jakarta.persistence.*;
-import main.hardware_pos_v2.Models.Item;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,12 +20,8 @@ public class Sale {
     @Column(name = "phone")
     private String phoneNumber;
 
-    @JoinTable(
-            name = "shopped-items",
-            joinColumns = @JoinColumn(name = "sale_id"),
-            inverseJoinColumns =  @JoinColumn(name = "items")
-    )
-    List<Item> itemList;
+    @Column
+    private String itemList;
 
     @Column(name = "reference-number")
     private String refNo;
@@ -42,7 +37,7 @@ public class Sale {
 
     public Sale() {}
 
-    public Sale(int id, String customerName, String phoneNumber, List<Item> itemList, String refNo, double totalPaid, double listTotal, double debt) {
+    public Sale(int id, String customerName, String phoneNumber, String itemList, String refNo, double totalPaid, double listTotal, double debt) {
         this.id = id;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
@@ -77,11 +72,11 @@ public class Sale {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Item> getItemList() {
+    public String getItemList() {
         return itemList;
     }
 
-    public void setItemList(List<Item> itemList) {
+    public void setItemList(String itemList) {
         this.itemList = itemList;
     }
 
