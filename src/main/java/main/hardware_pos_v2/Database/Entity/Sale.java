@@ -14,7 +14,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column(name = "customer-name")
+    @Column(name = "customer_name")
     private String customerName;
 
     @Column(name = "phone")
@@ -23,28 +23,39 @@ public class Sale {
     @Column
     private String itemList;
 
-    @Column(name = "reference-number")
+    @Column(name = "reference_number")
     private String refNo;
 
-    @Column(name = "total-paid")
+    @Column
+    private LocalDateTime date;
+
+    @Column(name = "total_paid")
     private double totalPaid;
 
-    @Column(name = "list-total")
+    @Column(name = "list_total")
     private double listTotal;
+
+    @Column(name = "server_name")
+    private String serverName;
 
     @Column
     private double debt;
 
-    public Sale() {}
+    public Sale() {
+        setRefNo();
+        setDate();
+    }
 
-    public Sale(int id, String customerName, String phoneNumber, String itemList, String refNo, double totalPaid, double listTotal, double debt) {
+    public Sale(int id, String customerName, String phoneNumber, String itemList, String refNo, LocalDateTime date, double totalPaid, double listTotal, String serverName, double debt) {
         this.id = id;
         this.customerName = customerName;
         this.phoneNumber = phoneNumber;
         this.itemList = itemList;
         this.refNo = refNo;
+        this.date = date;
         this.totalPaid = totalPaid;
         this.listTotal = listTotal;
+        this.serverName = serverName;
         this.debt = debt;
     }
 
@@ -88,10 +99,6 @@ public class Sale {
         this.refNo = timestamp + uniqueID;
     }
 
-    public void setRefNo(String refNo) {
-        this.refNo = refNo;
-    }
-
     public double getTotalPaid() {
         return totalPaid;
     }
@@ -116,16 +123,34 @@ public class Sale {
         this.debt = debt;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = LocalDateTime.now();
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
+
     @Override
     public String toString() {
         return "Sale{" +
                 "id=" + id +
                 ", customerName='" + customerName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", itemList=" + itemList +
+                ", itemList='" + itemList + '\'' +
                 ", refNo='" + refNo + '\'' +
+                ", date=" + date +
                 ", totalPaid=" + totalPaid +
                 ", listTotal=" + listTotal +
+                ", serverName='" + serverName + '\'' +
                 ", debt=" + debt +
                 '}';
     }
